@@ -1,0 +1,3 @@
+rootProject.name = 'aip-processor-api-root'
+
+include 'aip-processor-api'

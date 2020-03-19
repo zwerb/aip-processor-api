@@ -1,0 +1,67 @@
+/*
+ * (c) Copyright 2019 Palantir Technologies Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+syntax = "proto3";
+
+import "processing-service-v1.proto";
+import "processing-service-v2.proto";
+
+option java_package = "com.palantir.aip.proto.configuration";
+option java_outer_classname = "ConfigProtos";
+
+package aip.configuration.v1;
+
+
+/**
+ * All processors must implement Configuration Service, no messages will be sent to other RPC endpoints until
+ * configuration response is received.
+ */
+service ConfigurationService {
+    rpc Configure (ConfigurationRequest) returns (ConfigurationResponse) {
+    }
+}
+
+message ConfigurationRequest {
+    /** Human readable name of the orchestrator. */
+    string orchestrator_name = 1;
+
+    /** Human readable version of the orchestrator. */
+    string orchestrator_version = 2;
+}
+
+message ConfigurationResponse {
+    /** Human readable name of the provider. */
+    string provider_name = 1;
+
+    /** Human readable version of the provider. */
+    string provider_version = 2;
+
+    /** Indicates which protocol to use to communicate to this provider. */
+    ProtocolVersion version = 4;
+
+    /** Extra description information for a processor that is logically separate from the version information. */
+    string provider_description = 5;
+}
+
+message ProtocolVersion {
+    oneof config {
+        /* Implements ProcessingService from ./processing-service-v1.proto. */
+        aip.ProcessorV1Config v1 = 1;
+
+        /* Implements ProcessingService from ./processing-service-v2.proto. */
+        aip.processor.v2.ProcessorV2Config v2 = 2;
+    }
+}
