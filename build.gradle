@@ -58,12 +58,10 @@ subprojects {
 
     tasks.withType(JavaCompile) {
         options.compilerArgs += ['-Xlint:deprecation', '-Werror']
-        // Rule fails to run with Java 13
-        options.errorprone.errorproneArgs += ['-Xep:ThrowSpecificity:OFF']
     }
 
     java {
-        sourceCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
     }
 
     tasks.check.dependsOn javadoc, checkUnusedDependencies

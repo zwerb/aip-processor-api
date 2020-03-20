@@ -22,9 +22,6 @@ dependencies {
 
     implementation 'io.grpc:grpc-protobuf'
     implementation 'io.grpc:grpc-stub'
-
-    // gRPC generates @javax.annotation.Generated
-    compileOnly 'javax.annotation:javax.annotation-api'
 }
 
 protobuf {
