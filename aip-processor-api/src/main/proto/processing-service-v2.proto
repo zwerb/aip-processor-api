@@ -334,7 +334,7 @@ message Nitf21Image {
     int32 bands = 3;
 
     /** Path to a NITF 2.1 spec image */
-    string path = 3;
+    string path = 4;
 }
 
 message DigitalGlobeMetadata {
