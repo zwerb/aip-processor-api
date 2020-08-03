@@ -1,0 +1,5 @@
+type: improvement
+improvement:
+  description: Add support for processors which accept NITF 2.1 formatted imagery.
+  links:
+  - https://github.com/palantir/aip-processor-api/pull/67
