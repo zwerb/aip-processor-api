@@ -53,6 +53,7 @@ enum ImageFormat {
     PNG = 1;
     TIFF = 2;
     BGR888 = 3;
+    NITF21 = 4;
 }
 
 message ProcessorV2Config {
@@ -276,6 +277,7 @@ message Image {
         PngImage png_image = 2;
         TiffImage tiff_image = 3;
         Bgr888Image bgr_image = 4;
+        Nitf21Image nitf21_image = 5;
     }
 }
 
@@ -324,6 +326,11 @@ message TiffImage {
 
     /** The path to a TIFF encoded image. */
     string path = 3;
+}
+
+message Nitf21Image {
+    /** Path to a NITF 2.1 spec image */
+    string path = 1;
 }
 
 message DigitalGlobeMetadata {
